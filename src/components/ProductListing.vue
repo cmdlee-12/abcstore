@@ -16,13 +16,16 @@
                 />
             </div>
         </div>
-        <div class="flex flex-wrap transition-all duration-500 ease-linear">
+        <div v-if="filteredList.length > 0" class="flex flex-wrap transition-all duration-500 ease-linear">
             <ListingCard
             v-for="(product, index) in filteredList"
             :key="index"
             :data="product"
             />
         </div>
+        <NoResults
+        v-else
+        />
         <paginate
         v-model="page"
         :page-count="pages.length"
@@ -42,12 +45,14 @@
 import axios from 'axios';
 import Paginate from 'vuejs-paginate';
 import ListingCard from './ListingCard.vue';
+import NoResults from './NoResults.vue';
 import OInput from './OInput.vue';
 import ODropdown from './ODropdown.vue';
 export default {
     components: {
         Paginate,
         ListingCard,
+        NoResults,
         OInput,
         ODropdown
     },
